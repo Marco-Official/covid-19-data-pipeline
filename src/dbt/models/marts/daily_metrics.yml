@@ -1,0 +1,50 @@
+version: 2
+
+models:
+  - name: daily_metrics
+    description: "Daily aggregated COVID-19 metrics by country with day-over-day changes"
+    config:
+      materialized: table
+      tags: ["covid", "marts"]
+    columns:
+      - name: date
+        description: "The date of observation"
+        tests:
+          - not_null
+      - name: country_region
+        description: "Country or region name"
+        tests:
+          - not_null
+      - name: total_confirmed
+        description: "Total cumulative confirmed cases"
+        tests:
+          - not_null
+
+      - name: total_deaths
+        description: "Total cumulative deaths"
+        tests:
+          - not_null
+
+      - name: total_recovered
+        description: "Total cumulative recovered cases"
+
+      - name: total_active
+        description: "Total active cases (confirmed - deaths - recovered)"
+
+      - name: new_cases
+        description: "New confirmed cases since previous day"
+
+      - name: new_deaths
+        description: "New deaths since previous day"
+
+      - name: new_recovered
+        description: "New recovered cases since previous day"
+
+      - name: growth_rate
+        description: "Day-over-day growth rate of confirmed cases (as decimal)"
+
+      - name: mortality_rate
+        description: "Case fatality rate (deaths/confirmed cases)"
+
+      - name: recovery_rate
+        description: "Recovery rate (recovered/confirmed cases)"

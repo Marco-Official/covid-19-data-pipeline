@@ -1,0 +1,50 @@
+version: 2
+
+models:
+  - name: stg_covid_metrics
+    description: >
+      Staging model that combines COVID-19 metrics from different sources (confirmed cases, deaths, and recoveries)
+      into a single table with standardized column names and additional calculated fields.
+    columns:
+      - name: date
+        description: The date of the recorded metrics
+        tests:
+          - not_null
+
+      - name: province_state
+        description: Province or state name, can be null for country-level records
+
+      - name: country_region
+        description: Country or region name
+        tests:
+          - not_null
+
+      - name: latitude
+        description: Geographical latitude of the region
+
+      - name: longitude
+        description: Geographical longitude of the region
+
+      - name: confirmed_cases
+        description: Cumulative number of confirmed COVID-19 cases
+        tests:
+          - not_null
+
+      - name: death_count
+        description: Cumulative number of COVID-19 deaths
+        tests:
+          - not_null
+
+      - name: recovered_count
+        description: Cumulative number of recovered COVID-19 cases
+
+      - name: active_cases
+        description: >
+          Number of currently active cases, calculated as:
+          confirmed_cases - recovered_count - death_count
+
+      - name: mortality_rate
+        description: Percentage of confirmed cases that resulted in death
+
+      - name: recovery_rate
+        description: Percentage of confirmed cases that resulted in recovery

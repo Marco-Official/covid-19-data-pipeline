@@ -1,0 +1,30 @@
+# Project Identification
+name: "covid_analysis" # Name of your dbt project
+version: "1.0.0" # Project version
+config-version: 2 # dbt config file version
+
+# Links to profiles.yml
+profile: "covid_analysis" # Must match the profile name in profiles.yml
+
+# Directory Structure
+model-paths: ["models"] # Where your SQL models live
+analysis-paths: ["analyses"] # For one-off analyses
+test-paths: ["tests"] # Where tests are stored
+seed-paths: ["seeds"] # For static data files
+macro-paths: ["macros"] # For reusable SQL macros
+
+# Build Output Configuration
+target-path: "target" # Where dbt writes compiled SQL
+clean-targets: # What to clean up
+  - "target"
+  - "dbt_packages"
+
+# Model Configurations
+models:
+  covid_analysis: # Must match project name
+    +schema: main # Default schema
+    staging: # Staging models
+      +schema: staging # Will become main_staging
+    marts: # Final analytics models
+      +materialized: table # Stored as tables (persisted data)
+      +schema: analytics # Will become main_analytics

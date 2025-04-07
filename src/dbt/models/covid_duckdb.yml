@@ -1,0 +1,85 @@
+version: 2
+
+sources:
+  - name: covid
+    description: "Raw COVID-19 data from Johns Hopkins University CSSE"
+    schema: main
+    tables:
+      - name: raw_confirmed
+        description: "Raw data for confirmed COVID-19 cases"
+        columns:
+          - name: "Province/State"
+            description: "Province or state name, may be null for country-level records"
+
+          - name: '"Country/Region"'
+            description: "Country or region name"
+            tests:
+              - not_null
+          - name: Lat
+            description: "Latitude of the region"
+            tests:
+              - not_null
+          - name: Long
+            description: "Longitude of the region"
+            tests:
+              - not_null
+          - name: date
+            description: "Date of observation"
+            tests:
+              - not_null
+          - name: confirmed
+            description: "Cumulative number of confirmed cases"
+            tests:
+              - not_null
+
+      - name: raw_deaths
+        description: "Raw data for COVID-19 deaths"
+        columns:
+          - name: "Province/State"
+            description: "Province or state name, may be null for country-level records"
+          - name: '"Country/Region"'
+            description: "Country or region name"
+            tests:
+              - not_null
+          - name: Lat
+            description: "Latitude of the region"
+            tests:
+              - not_null
+          - name: Long
+            description: "Longitude of the region"
+            tests:
+              - not_null
+          - name: date
+            description: "Date of observation"
+            tests:
+              - not_null
+          - name: deaths
+            description: "Cumulative number of deaths"
+            tests:
+              - not_null
+
+      - name: raw_recovered
+        description: "Raw data for COVID-19 recoveries (discontinued after March 2023)"
+        columns:
+          - name: "Province/State"
+            description: "Province or state name, may be null for country-level records"
+          - name: '"Country/Region"'
+            description: "Country or region name"
+            tests:
+              - not_null
+          - name: Lat
+            description: "Latitude of the region"
+            tests:
+              - not_null
+          - name: Long
+            description: "Longitude of the region"
+            tests:
+              - not_null
+          - name: date
+            description: "Date of observation"
+            tests:
+              - not_null
+          - name: recovered
+            description: "Cumulative number of recovered cases"
+            tests:
+              - not_null

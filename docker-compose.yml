@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  covid-pipeline:
+    build: .
+    ports:
+      - "3000:3000" # Dagster UI
+    volumes:
+      - .:/app
+      - ./data:/app/data # Persist data between runs
+      - ./dagster_home:/app/dagster_home
+    environment:
+      - PYTHONPATH=/app
+      - DAGSTER_HOME=/app/dagster_home
+    command: dagster dev -h 0.0.0.0

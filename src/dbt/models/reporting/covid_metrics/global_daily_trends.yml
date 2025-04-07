@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: global_daily_trends
+    description: >
+      Answers the question: "How does a particular metric change over time within the dataset?"
+
+      This view tracks the evolution of COVID-19 metrics globally over time, specifically:
+      1. Daily progression of total cases and deaths
+      2. New cases reported each day
+      3. 7-day moving average to smooth out reporting irregularities
+      4. Growth rate to understand pandemic acceleration/deceleration
+
+      The time series analysis helps identify:
+      - Peak periods of the pandemic
+      - Effectiveness of global containment measures
+      - Reporting patterns and potential data anomalies
+    columns:
+      - name: date
+        description: "Date of observation"
+        tests:
+          - not_null
+          - unique
+      - name: total_cases
+        description: "Global cumulative confirmed cases, showing overall pandemic spread"
+        tests:
+          - not_null
+      - name: new_cases
+        description: "New cases reported on this date, indicating daily spread rate"
+      - name: total_deaths
+        description: "Global cumulative deaths, showing overall pandemic impact"
+        tests:
+          - not_null
+      - name: avg_growth_rate
+        description: "Average daily growth rate, indicating pandemic acceleration"
+      - name: cases_7day_avg
+        description: "7-day moving average of new cases, smoothing reporting irregularities"
+        tests:
+          - not_null

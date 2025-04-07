@@ -1,0 +1,76 @@
+version: 2
+
+models:
+  - name: daily_trends
+    description: >
+      Mart model that provides daily global COVID-19 statistics and trends.
+      Includes daily totals, new cases, moving averages, and growth rates
+      to enable time-series analysis and trend identification.
+    config:
+      materialized: table
+      tags: ["covid", "marts"]
+    columns:
+      - name: date
+        description: Date of observation
+        tests:
+          - not_null
+          - unique
+
+      - name: global_confirmed
+        description: Total confirmed cases worldwide on this date
+        tests:
+          - not_null
+
+      - name: global_deaths
+        description: Total deaths worldwide on this date
+        tests:
+          - not_null
+
+      - name: global_recovered
+        description: Total recovered cases worldwide on this date
+        tests: []
+
+      - name: global_active
+        description: Total active cases worldwide on this date (confirmed - deaths - recovered)
+        tests: []
+
+      - name: new_confirmed
+        description: New confirmed cases reported on this date (daily change)
+        tests: []
+
+      - name: new_deaths
+        description: New deaths reported on this date (daily change)
+        tests: []
+
+      - name: new_recovered
+        description: New recovered cases reported on this date (daily change)
+        tests: []
+
+      - name: confirmed_7day_avg
+        description: 7-day moving average of confirmed cases
+        tests:
+          - not_null
+
+      - name: deaths_7day_avg
+        description: 7-day moving average of deaths
+        tests:
+          - not_null
+
+      - name: avg_mortality_rate
+        description: Global average mortality rate on this date
+        tests:
+          - not_null
+
+      - name: avg_recovery_rate
+        description: Global average recovery rate on this date
+        tests:
+          - not_null
+
+      - name: confirmed_growth_rate
+        description: Daily growth rate of confirmed cases (percentage)
+        tests: []
+
+      - name: generated_at
+        description: Timestamp when this record was generated
+        tests:
+          - not_null

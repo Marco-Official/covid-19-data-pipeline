@@ -1,0 +1,24 @@
+covid_analysis: # Project name
+  outputs:
+    dev:
+      type: duckdb
+      path: ../../data/processed/covid_analysis_dev.duckdb
+      threads: 1
+
+    staging:
+      type: duckdb
+      path: ../../data/processed/covid_analysis_staging.duckdb
+      threads: 2
+
+    prod:
+      type: duckdb
+      path: /opt/covid_analysis/data/covid_analysis_prod.duckdb
+      threads: 4
+      read_only: true # Extra safety in production
+
+  target: dev # Default to development
+
+  # Common extensions for all environments
+  extensions:
+    - httpfs # For downloading data directly
+    - parquet # For efficient data storage

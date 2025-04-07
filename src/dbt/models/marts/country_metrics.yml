@@ -1,0 +1,72 @@
+version: 2
+
+models:
+  - name: country_metrics
+    description: >
+      Latest COVID-19 metrics by country, including total cases, deaths,
+      recoveries, and calculated rates for analysis of country-level impact.
+    config:
+      materialized: table
+      tags: ["covid", "marts"]
+    columns:
+      - name: country_region
+        description: Country or region name
+        tests:
+          - not_null
+          - unique
+
+      - name: latest_date
+        description: Most recent date for which data is available
+        tests:
+          - not_null
+
+      - name: total_confirmed
+        description: Total confirmed cases in the country
+        tests:
+          - not_null
+
+      - name: total_deaths
+        description: Total deaths in the country
+        tests:
+          - not_null
+
+      - name: total_recovered
+        description: Total recovered cases in the country
+
+      - name: avg_mortality_rate
+        description: Average mortality rate (deaths/confirmed cases)
+        tests:
+          - not_null
+
+      - name: avg_recovery_rate
+        description: Average recovery rate (recovered/confirmed cases)
+
+      - name: confirmed_rank
+        description: Country ranking by total confirmed cases (1 = highest)
+        tests:
+          - not_null
+
+      - name: death_rank
+        description: Country ranking by total deaths (1 = highest)
+        tests:
+          - not_null
+
+      - name: mortality_rate_rank
+        description: Country ranking by mortality rate (1 = highest)
+        tests:
+          - not_null
+
+      - name: pct_of_global_confirmed
+        description: Percentage of global confirmed cases
+        tests:
+          - not_null
+
+      - name: pct_of_global_deaths
+        description: Percentage of global deaths
+        tests:
+          - not_null
+
+      - name: generated_at
+        description: Timestamp when this record was generated
+        tests:
+          - not_null

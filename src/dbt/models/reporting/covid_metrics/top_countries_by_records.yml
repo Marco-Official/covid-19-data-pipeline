@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: top_countries_by_records
+    description: >
+      Identifies countries that have set records in various COVID-19 metrics,
+      such as highest case counts, death counts, or mortality rates.
+    columns:
+      - name: country_region
+        description: Country or region name
+        tests:
+          - not_null
+          - unique
+
+      - name: record_count
+        description: Value that set the record
+        tests:
+          - not_null
+
+      - name: total_cases
+        description: Total confirmed cases in the country
+        tests:
+          - not_null
+
+      - name: total_deaths
+        description: Total deaths in the country
+        tests:
+          - not_null
+
+      - name: mortality_rate
+        description: Death rate as percentage of confirmed cases
+        tests:
+          - not_null
+
+      - name: percentage_of_records
+        description: Percentage contribution to global records
+        tests:
+          - not_null

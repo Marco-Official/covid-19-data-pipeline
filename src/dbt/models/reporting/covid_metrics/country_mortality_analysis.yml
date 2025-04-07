@@ -1,0 +1,43 @@
+version: 2
+
+models:
+  - name: country_mortality_analysis
+    description: >
+      Analyzes mortality rates and patterns across different countries,
+      helping identify areas with higher risk or better containment measures.
+    columns:
+      - name: country_region
+        description: Country or region name
+        tests:
+          - not_null
+          - unique
+
+      - name: total_cases
+        description: Total confirmed cases in the country
+        tests:
+          - not_null
+
+      - name: total_deaths
+        description: Total deaths in the country
+        tests:
+          - not_null
+
+      - name: mortality_rate
+        description: Death rate as percentage of confirmed cases
+        tests:
+          - not_null
+
+      - name: cases_rank
+        description: Country ranking by total cases (1 = highest)
+        tests:
+          - not_null
+
+      - name: mortality_rank
+        description: Country ranking by mortality rate (1 = highest)
+        tests:
+          - not_null
+
+      - name: above_avg_mortality
+        description: Flag indicating if country's mortality rate is above global average
+        tests:
+          - not_null
